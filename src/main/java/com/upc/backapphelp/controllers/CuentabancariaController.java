@@ -19,7 +19,7 @@ public class CuentabancariaController {
     @Autowired
     private CuentabancariaService cuentabancariaService;
     @GetMapping("/cuentabancarias")
-    @PreAuthorize("hasAnyRole('DAMNIFICADO', 'DONANTE')")
+    @PreAuthorize("hasAnyRole('DAMNIFICADO', 'DONANTE', 'ADMIN')")
     public List<CuentabancariaDTO> listarClientes() {
         List<Cuentabancaria> lista = cuentabancariaService.listarCuenta();
         ModelMapper modelMapper = new ModelMapper();
@@ -27,7 +27,7 @@ public class CuentabancariaController {
         return listaDTO;
     }
     @PostMapping("/cuentabancaria")
-    @PreAuthorize("hasAnyRole('DAMNIFICADO', 'DONANTE')")
+    @PreAuthorize("hasAnyRole('DAMNIFICADO', 'DONANTE', 'ADMIN')")
     public CuentabancariaDTO insertarCuenta(@RequestBody CuentabancariaDTO cuentabancariaDTO) {
         ModelMapper modelMapper = new ModelMapper();
         Cuentabancaria cuentabancaria = modelMapper.map(cuentabancariaDTO, Cuentabancaria.class);
@@ -36,7 +36,7 @@ public class CuentabancariaController {
     }
 
     @PutMapping("/cuentabancaria")
-    @PreAuthorize("hasAnyRole('DAMNIFICADO', 'DONANTE')")
+    @PreAuthorize("hasAnyRole('DAMNIFICADO', 'DONANTE', 'ADMIN')")
     public CuentabancariaDTO updateCuenta(@RequestBody CuentabancariaDTO cuentabancariaDTO) {
         ModelMapper modelMapper = new ModelMapper();
         Cuentabancaria cuentabancaria = modelMapper.map(cuentabancariaDTO, Cuentabancaria.class);
@@ -44,7 +44,7 @@ public class CuentabancariaController {
         return modelMapper.map(cuentabancaria, CuentabancariaDTO.class);
     }
     @DeleteMapping("/cuentabancaria/{id}")
-    @PreAuthorize("hasAnyRole('DAMNIFICADO', 'DONANTE')")
+    @PreAuthorize("hasAnyRole('DAMNIFICADO', 'DONANTE', 'ADMIN')")
     public void eliminarCuenta(@PathVariable int id) {
         cuentabancariaService.eliminar(id);
     }

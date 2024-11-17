@@ -19,7 +19,7 @@ public class DepartamentoController {
     @Autowired
     private DepartamentoService departamentoService;
     @GetMapping("/departamentos")
-    @PreAuthorize("hasAnyRole('DAMNIFICADO', 'DONANTE')")
+    @PreAuthorize("hasAnyRole('DAMNIFICADO', 'DONANTE', 'ADMIN')")
     public List<DepartamentoDTO> listarDepartamento() {
         List<Departamento> lista = departamentoService.listarDepartamento();
         ModelMapper modelMapper = new ModelMapper();
@@ -27,7 +27,7 @@ public class DepartamentoController {
         return listaDTO;
     }
     @PostMapping("/departamento")
-    @PreAuthorize("hasAnyRole('DAMNIFICADO', 'DONANTE')")
+    @PreAuthorize("hasAnyRole('DAMNIFICADO', 'DONANTE', 'ADMIN')")
     public DepartamentoDTO insetarDepartamento(@RequestBody DepartamentoDTO departamentoDTO) {
         ModelMapper modelMapper = new ModelMapper();
         Departamento departamento = modelMapper.map(departamentoDTO, Departamento.class);
@@ -35,7 +35,7 @@ public class DepartamentoController {
         return modelMapper.map(departamento, DepartamentoDTO.class);
     }
     @PutMapping("/departamento")
-    @PreAuthorize("hasAnyRole('DAMNIFICADO', 'DONANTE')")
+    @PreAuthorize("hasAnyRole('DAMNIFICADO', 'DONANTE', 'ADMIN')")
     public DepartamentoDTO updateDepartamento(@RequestBody DepartamentoDTO departamentoDTO) {
         ModelMapper modelMapper = new ModelMapper();
         Departamento departamento = modelMapper.map(departamentoDTO, Departamento.class);
@@ -43,7 +43,7 @@ public class DepartamentoController {
         return modelMapper.map(departamento, DepartamentoDTO.class);
     }
     @DeleteMapping("/departamento/{id}")
-    @PreAuthorize("hasAnyRole('DAMNIFICADO', 'DONANTE')")
+    @PreAuthorize("hasAnyRole('DAMNIFICADO', 'DONANTE', 'ADMIN')")
     public void eliminarDepartamento(@PathVariable int id) {
         departamentoService.eliminar(id);
     }

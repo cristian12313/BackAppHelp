@@ -19,7 +19,7 @@ public class TipoDonacionController {
     @Autowired
     private TipoDonacionService tipoDonacionService;
     @GetMapping ("/tipoDonaciones")
-    @PreAuthorize("hasAnyRole('DAMNIFICADO', 'DONANTE')")
+    @PreAuthorize("hasAnyRole('DAMNIFICADO', 'DONANTE', 'ADMIN')")
     public List<TipoDonacionDTO> listTipoDonacion() {
         List<Tipodonacion> list = tipoDonacionService.listTipoDonacion();
         ModelMapper modelMapper = new ModelMapper();
@@ -27,7 +27,7 @@ public class TipoDonacionController {
         return listDTO;
     }
     @PostMapping("/tipoDonacion")
-    @PreAuthorize("hasAnyRole('DAMNIFICADO', 'DONANTE')")
+    @PreAuthorize("hasAnyRole('DAMNIFICADO', 'DONANTE', 'ADMIN')")
     public TipoDonacionDTO insertTipoDonacion(@RequestBody TipoDonacionDTO tipoDonacionDTO) {
         ModelMapper modelMapper = new ModelMapper();
         Tipodonacion tipoDonacion = modelMapper.map(tipoDonacionDTO, Tipodonacion.class);
@@ -36,7 +36,7 @@ public class TipoDonacionController {
     }
 
    @PutMapping ("/tipoDonacion")
-   @PreAuthorize("hasAnyRole('DAMNIFICADO', 'DONANTE')")
+   @PreAuthorize("hasAnyRole('DAMNIFICADO', 'DONANTE', 'ADMIN')")
    public TipoDonacionDTO updateTipoDonacion(@RequestBody TipoDonacionDTO tipoDonacionDTO) {
         ModelMapper modelMapper = new ModelMapper();
        Tipodonacion tipoDonacion = modelMapper.map(tipoDonacionDTO, Tipodonacion.class);
@@ -44,7 +44,7 @@ public class TipoDonacionController {
         return modelMapper.map(tipoDonacion, TipoDonacionDTO.class);
    }
     @DeleteMapping("/tipoDonacion/{id}")
-    @PreAuthorize("hasAnyRole('DAMNIFICADO', 'DONANTE')")
+    @PreAuthorize("hasAnyRole('DAMNIFICADO', 'DONANTE', 'ADMIN')")
     public void eliminarTipoDona(@PathVariable int id) {
         tipoDonacionService.eliminar(id);
     }

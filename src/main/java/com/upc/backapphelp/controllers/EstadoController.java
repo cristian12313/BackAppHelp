@@ -19,7 +19,7 @@ public class EstadoController {
     @Autowired
     private EstadoService estadoService;
     @GetMapping("/estados")
-    @PreAuthorize("hasAnyRole('DAMNIFICADO', 'DONANTE')")
+    @PreAuthorize("hasAnyRole('DAMNIFICADO', 'DONANTE', 'ADMIN')")
     public List<EstadoDTO> listEstado() {
         List<Estado> list = estadoService.listEstado();
         ModelMapper modelMapper = new ModelMapper();
@@ -27,7 +27,7 @@ public class EstadoController {
         return listDTO;
     }
     @PostMapping("/estado")
-    @PreAuthorize("hasAnyRole('DAMNIFICADO', 'DONANTE')")
+    @PreAuthorize("hasAnyRole('DAMNIFICADO', 'DONANTE', 'ADMIN')")
     public EstadoDTO insertEstado(@RequestBody EstadoDTO estadoDTO) {
         ModelMapper modelMapper = new ModelMapper();
         Estado estado = modelMapper.map(estadoDTO, Estado.class);
@@ -36,7 +36,7 @@ public class EstadoController {
     }
 
     @PutMapping("/estado")
-    @PreAuthorize("hasAnyRole('DAMNIFICADO', 'DONANTE')")
+    @PreAuthorize("hasAnyRole('DAMNIFICADO', 'DONANTE', 'ADMIN')")
     public EstadoDTO updateEstado(@RequestBody EstadoDTO estadoDTO) {
         ModelMapper modelMapper = new ModelMapper();
         Estado estado = modelMapper.map(estadoDTO, Estado.class);
@@ -45,7 +45,7 @@ public class EstadoController {
     }
 
     @DeleteMapping("/estado/{id}")
-    @PreAuthorize("hasAnyRole('DAMNIFICADO', 'DONANTE')")
+    @PreAuthorize("hasAnyRole('DAMNIFICADO', 'DONANTE', 'ADMIN')")
     public void eliminarEstado(@PathVariable int id) {
         estadoService.eliminar(id);
     }

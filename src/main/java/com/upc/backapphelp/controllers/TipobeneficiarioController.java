@@ -18,7 +18,7 @@ public class TipobeneficiarioController {
     @Autowired
     private TipobeneficiarioService tipobeneficiarioService;
     @GetMapping("/tipobeneficiarios")
-    @PreAuthorize("hasAnyRole('DAMNIFICADO', 'DONANTE')")
+    @PreAuthorize("hasAnyRole('DAMNIFICADO', 'DONANTE', 'ADMIN')")
     public List<TipobeneficiarioDTO> listarTipobeneficiario() {
         List<Tipobeneficiario> lista = tipobeneficiarioService.listarTipobeneficiario();
         ModelMapper modelMapper = new ModelMapper();
@@ -26,7 +26,7 @@ public class TipobeneficiarioController {
         return listaDTO;
     }
     @PostMapping("/tipobeneficiario")
-    @PreAuthorize("hasAnyRole('DAMNIFICADO', 'DONANTE')")
+    @PreAuthorize("hasAnyRole('DAMNIFICADO', 'DONANTE', 'ADMIN')")
     public TipobeneficiarioDTO insertarTipobeneficiario(@RequestBody TipobeneficiarioDTO tipobeneficiarioDTO) {
         ModelMapper modelMapper = new ModelMapper();
         Tipobeneficiario tipobeneficiario = modelMapper.map(tipobeneficiarioDTO, Tipobeneficiario.class);
@@ -35,7 +35,7 @@ public class TipobeneficiarioController {
     }
 
     @PutMapping("/tipobeneficiario")
-    @PreAuthorize("hasAnyRole('DAMNIFICADO', 'DONANTE')")
+    @PreAuthorize("hasAnyRole('DAMNIFICADO', 'DONANTE', 'ADMIN')")
     public TipobeneficiarioDTO updateTipobeneficiario(@RequestBody TipobeneficiarioDTO tipobeneficiarioDTO) {
         ModelMapper modelMapper = new ModelMapper();
         Tipobeneficiario tipobeneficiario = modelMapper.map(tipobeneficiarioDTO, Tipobeneficiario.class);
@@ -43,7 +43,7 @@ public class TipobeneficiarioController {
         return modelMapper.map(tipobeneficiario, TipobeneficiarioDTO.class);
     }
     @DeleteMapping("/tipobeneficiario/{id}")
-    @PreAuthorize("hasAnyRole('DAMNIFICADO', 'DONANTE')")
+    @PreAuthorize("hasAnyRole('DAMNIFICADO', 'DONANTE', 'ADMIN')")
     public void eliminarTipoBen(@PathVariable int id) {
         tipobeneficiarioService.eliminar(id);
     }

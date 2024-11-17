@@ -19,7 +19,7 @@ public class DistritoController {
     @Autowired
     private DistritoService distritoService;
     @GetMapping("/distritos")
-    @PreAuthorize("hasAnyRole('DAMNIFICADO', 'DONANTE')")
+    @PreAuthorize("hasAnyRole('DAMNIFICADO', 'DONANTE', 'ADMIN')")
     public List<DistritoDTO> listDistrito() {
         List<Distrito> list = distritoService.listDistrito();
         ModelMapper modelMapper = new ModelMapper();
@@ -27,7 +27,7 @@ public class DistritoController {
         return listDTO;
     }
     @PostMapping("/distrito")
-    @PreAuthorize("hasAnyRole('DAMNIFICADO', 'DONANTE')")
+    @PreAuthorize("hasAnyRole('DAMNIFICADO', 'DONANTE', 'ADMIN')")
     public DistritoDTO insertDistrito(@RequestBody DistritoDTO distritoDTO) {
         ModelMapper modelMapper = new ModelMapper();
         Distrito distrito = modelMapper.map(distritoDTO, Distrito.class);
@@ -36,7 +36,7 @@ public class DistritoController {
     }
 
     @PutMapping("/distrito")
-    @PreAuthorize("hasAnyRole('DAMNIFICADO', 'DONANTE')")
+    @PreAuthorize("hasAnyRole('DAMNIFICADO', 'DONANTE', 'ADMIN')")
     public DistritoDTO updateDistrito(@RequestBody DistritoDTO distritoDTO) {
         ModelMapper modelMapper = new ModelMapper();
         Distrito distrito = modelMapper.map(distritoDTO, Distrito.class);
@@ -45,7 +45,7 @@ public class DistritoController {
     }
 
     @DeleteMapping("/distrito/{id}")
-    @PreAuthorize("hasAnyRole('DAMNIFICADO', 'DONANTE')")
+    @PreAuthorize("hasAnyRole('DAMNIFICADO', 'DONANTE', 'ADMIN')")
     public void eliminarDistrito(@PathVariable int id) {
         distritoService.eliminar(id);
     }

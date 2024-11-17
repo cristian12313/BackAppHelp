@@ -21,7 +21,7 @@ public class CampaniaController {
     @Autowired
     private CampaniaService campaniaService;
     @GetMapping("/campanias")
-    @PreAuthorize("hasAnyRole('DAMNIFICADO', 'DONANTE')")
+    @PreAuthorize("hasAnyRole('DAMNIFICADO', 'DONANTE', 'ADMIN')")
     public List<CampaniaDTO> listarCampania() {
         List<Campania> lista = campaniaService.listarCampania();
         ModelMapper modelMapper = new ModelMapper();
